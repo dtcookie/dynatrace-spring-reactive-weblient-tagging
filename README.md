@@ -11,7 +11,7 @@ private static final WebClient client = WebClient.create();
 
 ...
 
-public Mono<DummyModel> callAllEndpoints() {    	
+public Mono<Model> callAllEndpoints() {    	
   return callEndpoint("enpoint-A")
           .then(callEndpoint("enpoint-B"))
           .then(callEndpoint("enpoint-C"));
@@ -36,7 +36,7 @@ private static final WebClient client = WebClient.create();
 
 ...
 
-public Mono<DummyModel> callEndpoint(final String uri) {  
+public Mono<Model> callEndpoint(final String uri) {  
   return dtcookie.Dynatrace.decorate(client.method(HttpMethod.GET).uri(uri).retrieve().bodyToMono(Model.class));
 }
 ```
@@ -50,7 +50,7 @@ private static final WebClient client = dtcookie.Dynatrace.decorate(WebClient.cr
 
 ...
 
-public Mono<DummyModel> callEndpoint(final String uri) {  
+public Mono<Model> callEndpoint(final String uri) {  
   return client.method(HttpMethod.GET).uri(uri).retrieve().bodyToMono(Model.class);
 }
 ```
