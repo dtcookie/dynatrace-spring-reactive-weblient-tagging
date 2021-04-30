@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>dtcookie</groupId>
+	<artifactId>dynatrace-spring-reactive-weblient-tagging</artifactId>
+	<version>1.0.0</version>
+	<name>dtcookie</name>
+
+	<properties>
+		<java.version>1.8</java.version>
+		<maven.compiler.target>${java.version}</maven.compiler.target>
+		<maven.compiler.source>${java.version}</maven.compiler.source>
+	    <project.java.version>${java.version}</project.java.version>
+	    <springboot.version>5.2.8.RELEASE</springboot.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+	</properties>
+	
+    <dependencies>  
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webflux</artifactId>
+			<version>${springboot.version}</version>
+			<scope>compile</scope>
+        </dependency>
+    </dependencies>
+</project>

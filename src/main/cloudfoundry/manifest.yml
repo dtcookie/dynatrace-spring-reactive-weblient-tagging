@@ -1,0 +1,12 @@
+applications:
+  - name: ${project.artifactId}
+memory: 2G
+health-check-http-endpoint: /actuator/health
+health-check-type: http
+buildpack: java_buildpack_offline
+stack: cflinuxfs3
+env:
+  SPRING_PROFILES_ACTIVE: cloud
+  JVM: openjdk
+  JBP_CONFIG_OPENJDK: "version: 1.8.+"
+  JAVA_OPTS: -XX:+UseG1GC -XX:+UseStringDeduplication
