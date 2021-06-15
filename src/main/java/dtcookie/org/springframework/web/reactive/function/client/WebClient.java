@@ -34,13 +34,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.reactive.ClientHttpRequest;
+import org.springframework.http.client.reactive.ClientHttpResponse;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.reactive.function.BodyExtractor;
 import org.springframework.web.reactive.function.BodyInserter;
 import org.springframework.web.reactive.function.client.ClientResponse;
 import org.springframework.web.util.UriBuilder;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import reactor.util.context.Context;
 
 public class WebClient implements org.springframework.web.reactive.function.client.WebClient {
 	
@@ -178,6 +181,21 @@ public class WebClient implements org.springframework.web.reactive.function.clie
 			return dtcookie.reactor.core.publisher.Mono.decorate(rs.toBodilessEntity());
 		}
 
+		@Override
+		public <T> Mono<ResponseEntity<Flux<T>>> toEntityFlux(Class<T> elementType) {
+			return dtcookie.reactor.core.publisher.Mono.decorate(rs.toEntityFlux(elementType));
+		}
+
+		@Override
+		public <T> Mono<ResponseEntity<Flux<T>>> toEntityFlux(ParameterizedTypeReference<T> elementTypeReference) {
+			return dtcookie.reactor.core.publisher.Mono.decorate(rs.toEntityFlux(elementTypeReference));
+		}
+
+		@Override
+		public <T> Mono<ResponseEntity<Flux<T>>> toEntityFlux(BodyExtractor<Flux<T>, ? super ClientHttpResponse> bodyExtractor) {
+			return dtcookie.reactor.core.publisher.Mono.decorate(rs.toEntityFlux(bodyExtractor));
+		}
+
 	}
 	
 	private static final class RequestBodySpec implements org.springframework.web.reactive.function.client.WebClient.RequestBodySpec {
@@ -204,6 +222,7 @@ public class WebClient implements org.springframework.web.reactive.function.clie
 		}
 
 		@Override
+		@Deprecated
 		public Mono<ClientResponse> exchange() {
 			return dtcookie.reactor.core.publisher.Mono.decorate(rbs.exchange());
 		}
@@ -304,6 +323,27 @@ public class WebClient implements org.springframework.web.reactive.function.clie
 			return RequestHeadersSpec.decorate(rbs.syncBody(body));
 		}
 
+		@Override
+		@Deprecated
+		public org.springframework.web.reactive.function.client.WebClient.RequestBodySpec context(Function<Context, Context> contextModifier) {
+			return decorate(rbs.context(contextModifier));
+		}
+
+		@Override
+		public org.springframework.web.reactive.function.client.WebClient.RequestBodySpec httpRequest(Consumer<ClientHttpRequest> requestConsumer) {
+			return decorate(rbs.httpRequest(requestConsumer));
+		}
+
+		@Override
+		public <V> Mono<V> exchangeToMono(Function<ClientResponse, ? extends Mono<V>> responseHandler) {
+			return dtcookie.reactor.core.publisher.Mono.decorate(rbs.exchangeToMono(responseHandler));
+		}
+
+		@Override
+		public <V> Flux<V> exchangeToFlux(Function<ClientResponse, ? extends Flux<V>> responseHandler) {
+			return rbs.exchangeToFlux(responseHandler);
+		}
+
 	}
 	
 	
@@ -326,6 +366,7 @@ public class WebClient implements org.springframework.web.reactive.function.clie
 		}
 
 		@Override
+		@Deprecated
 		public Mono<ClientResponse> exchange() {
 			return dtcookie.reactor.core.publisher.Mono.decorate(rbus.exchange());
 		}
@@ -455,6 +496,27 @@ public class WebClient implements org.springframework.web.reactive.function.clie
 		public org.springframework.web.reactive.function.client.WebClient.RequestBodySpec uri(Function<UriBuilder, URI> uriFunction) {
 			return RequestBodySpec.decorate(rbus.uri(uriFunction));
 		}
+
+		@Override
+		@Deprecated
+		public org.springframework.web.reactive.function.client.WebClient.RequestBodySpec context(Function<Context, Context> contextModifier) {
+			return RequestBodySpec.decorate(rbus.context(contextModifier));
+		}
+
+		@Override
+		public org.springframework.web.reactive.function.client.WebClient.RequestBodySpec httpRequest(Consumer<ClientHttpRequest> requestConsumer) {
+			return RequestBodySpec.decorate(rbus.httpRequest(requestConsumer));
+		}
+
+		@Override
+		public <V> Mono<V> exchangeToMono(Function<ClientResponse, ? extends Mono<V>> responseHandler) {
+			return dtcookie.reactor.core.publisher.Mono.decorate(rbus.exchangeToMono(responseHandler));
+		}
+
+		@Override
+		public <V> Flux<V> exchangeToFlux(Function<ClientResponse, ? extends Flux<V>> responseHandler) {
+			return rbus.exchangeToFlux(responseHandler);
+		}
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -477,6 +539,7 @@ public class WebClient implements org.springframework.web.reactive.function.clie
 		}
 
 		@Override
+		@Deprecated
 		public Mono<ClientResponse> exchange() {
 			return dtcookie.reactor.core.publisher.Mono.decorate(rhs.exchange());
 		}
@@ -536,6 +599,27 @@ public class WebClient implements org.springframework.web.reactive.function.clie
 			return (S) RequestHeadersSpec.decorate(rhs.attributes(attributesConsumer));
 		}
 
+		@Override
+		@Deprecated
+		public S context(Function<Context, Context> contextModifier) {
+			return (S) RequestHeadersSpec.decorate(rhs.context(contextModifier));
+		}
+
+		@Override
+		public S httpRequest(Consumer<ClientHttpRequest> requestConsumer) {
+			return (S) RequestHeadersSpec.decorate(rhs.httpRequest(requestConsumer));
+		}
+
+		@Override
+		public <V> Mono<V> exchangeToMono(Function<ClientResponse, ? extends Mono<V>> responseHandler) {
+			return dtcookie.reactor.core.publisher.Mono.decorate(rhs.exchangeToMono(responseHandler));
+		}
+
+		@Override
+		public <V> Flux<V> exchangeToFlux(Function<ClientResponse, ? extends Flux<V>> responseHandler) {
+			return rhs.exchangeToFlux(responseHandler);
+		}
+
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -565,6 +649,7 @@ public class WebClient implements org.springframework.web.reactive.function.clie
 		}
 		
 		@Override
+		@Deprecated
 		public Mono<ClientResponse> exchange() {
 			return dtcookie.reactor.core.publisher.Mono.decorate(rhs.exchange());
 		}
@@ -647,6 +732,27 @@ public class WebClient implements org.springframework.web.reactive.function.clie
 		@Override
 		public org.springframework.web.reactive.function.client.WebClient.ResponseSpec retrieve() {
 			return ResponseSpec.decorate(rhs.retrieve());
+		}
+
+		@Override
+		@Deprecated
+		public P context(Function<Context, Context> contextModifier) {
+			return (P) RequestHeadersSpec.decorate(rhs.context(contextModifier));
+		}
+
+		@Override
+		public P httpRequest(Consumer<ClientHttpRequest> requestConsumer) {
+			return (P) RequestHeadersSpec.decorate(rhs.httpRequest(requestConsumer));
+		}
+
+		@Override
+		public <V> Mono<V> exchangeToMono(Function<ClientResponse, ? extends Mono<V>> responseHandler) {
+			return dtcookie.reactor.core.publisher.Mono.decorate(rhs.exchangeToMono(responseHandler));
+		}
+
+		@Override
+		public <V> Flux<V> exchangeToFlux(Function<ClientResponse, ? extends Flux<V>> responseHandler) {
+			return rhs.exchangeToFlux(responseHandler);
 		}
 	}
 	
