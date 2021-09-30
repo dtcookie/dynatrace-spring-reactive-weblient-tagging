@@ -656,77 +656,77 @@ public class WebClient implements org.springframework.web.reactive.function.clie
 
 		@Override
 		public P uri(String uri, Object... uriVariables) {
-			return (P) RequestHeadersSpec.decorate(rhs.uri(uri, uriVariables));
+			return (P) RequestHeadersUriSpec.decorate(rhs.uri(uri, uriVariables));
 		}
 
 		@Override
 		public P uri(URI uri) {
-			return (P) RequestHeadersSpec.decorate(rhs.uri(uri));
+			return (P) RequestHeadersUriSpec.decorate(rhs.uri(uri));
 		}
 
 		@Override
 		public P uri(String uri, Map<String, ?> uriVariables) {
-			return (P) RequestHeadersSpec.decorate(rhs.uri(uri, uriVariables));
+			return (P) RequestHeadersUriSpec.decorate(rhs.uri(uri, uriVariables));
 		}
 
 		@Override
 		public P uri(String uri, Function<UriBuilder, URI> uriFunction) {
-			return (P) RequestHeadersSpec.decorate(rhs.uri(uri, uriFunction));
+			return (P) RequestHeadersUriSpec.decorate(rhs.uri(uri, uriFunction));
 		}
 
 		@Override
 		public P uri(Function<UriBuilder, URI> uriFunction) {
-			return (P) RequestHeadersSpec.decorate(rhs.uri(uriFunction));
+			return (P) RequestHeadersUriSpec.decorate(rhs.uri(uriFunction));
 		}
 
 		@Override
 		public P accept(MediaType... acceptableMediaTypes) {
-			return (P) RequestHeadersSpec.decorate(rhs.accept(acceptableMediaTypes));
+			return (P) RequestHeadersUriSpec.decorate(rhs.accept(acceptableMediaTypes));
 		}
 
 		@Override
 		public P acceptCharset(Charset... acceptableCharsets) {
-			return (P) RequestHeadersSpec.decorate(rhs.acceptCharset(acceptableCharsets));
+			return (P) RequestHeadersUriSpec.decorate(rhs.acceptCharset(acceptableCharsets));
 		}
 
 		@Override
 		public P cookie(String name, String value) {
-			return (P) RequestHeadersSpec.decorate(rhs.cookie(name, value));
+			return (P) RequestHeadersUriSpec.decorate(rhs.cookie(name, value));
 		}
 
 		@Override
 		public P cookies(Consumer<MultiValueMap<String, String>> cookiesConsumer) {
-			return (P) RequestHeadersSpec.decorate(rhs.cookies(cookiesConsumer));
+			return (P) RequestHeadersUriSpec.decorate(rhs.cookies(cookiesConsumer));
 		}
 
 		@Override
 		public P ifModifiedSince(ZonedDateTime ifModifiedSince) {
-			return (P) RequestHeadersSpec.decorate(rhs.ifModifiedSince(ifModifiedSince));
+			return (P) RequestHeadersUriSpec.decorate(rhs.ifModifiedSince(ifModifiedSince));
 		}
 
 		@Override
 		public P ifNoneMatch(String... ifNoneMatches) {
-			return (P) RequestHeadersSpec.decorate(rhs.ifNoneMatch(ifNoneMatches));
+			return (P) RequestHeadersUriSpec.decorate(rhs.ifNoneMatch(ifNoneMatches));
 		}
 
 		@Override
 		public P header(String headerName, String... headerValues) {
-			return (P) RequestHeadersSpec.decorate(rhs.header(headerName, headerValues));
+			return (P) RequestHeadersUriSpec.decorate(rhs.header(headerName, headerValues));
 		}
 
 		@Override
 		public P headers(Consumer<HttpHeaders> headersConsumer) {
-			return (P) RequestHeadersSpec.decorate(rhs.headers(headersConsumer));
+			return (P) RequestHeadersUriSpec.decorate(rhs.headers(headersConsumer));
 		}
 
 		@Override
 		public P attribute(String name, Object value) {
-			return (P) RequestHeadersSpec.decorate(rhs.attribute(name, value));
+			return (P) RequestHeadersUriSpec.decorate(rhs.attribute(name, value));
 		}
 
 		@Override
 		public P attributes(Consumer<Map<String, Object>> attributesConsumer) {
-			return (P) RequestHeadersSpec.decorate(rhs.attributes(attributesConsumer));
+			return (P) RequestHeadersUriSpec.decorate(rhs.attributes(attributesConsumer));
 		}
 
 		@Override
@@ -737,12 +737,12 @@ public class WebClient implements org.springframework.web.reactive.function.clie
 		@Override
 		@Deprecated
 		public P context(Function<Context, Context> contextModifier) {
-			return (P) RequestHeadersSpec.decorate(rhs.context(contextModifier));
+			return (P) RequestHeadersUriSpec.decorate(rhs.context(contextModifier));
 		}
 
 		@Override
 		public P httpRequest(Consumer<ClientHttpRequest> requestConsumer) {
-			return (P) RequestHeadersSpec.decorate(rhs.httpRequest(requestConsumer));
+			return (P) RequestHeadersUriSpec.decorate(rhs.httpRequest(requestConsumer));
 		}
 
 		@Override
